@@ -1,6 +1,6 @@
 # Dresbach Hosting - Painel de Hospedagem e Revenda
 
-![Dresbach Hosting Logo](/public/LOGO_DRESBACH_500.svg)
+![Dresbach Hosting Logo](./public/LOGO_DRESBACH_500.svg)
 
 ## Visão Geral
 
