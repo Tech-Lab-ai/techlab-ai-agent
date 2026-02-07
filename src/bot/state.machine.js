@@ -1,14 +1,30 @@
 
-const flow = require('./state.map');
+const { handleGreeting, handleMainMenu } = require('../flows/greeting.flow');
+const { handleLgpd } = require('../flows/lgpd.flow');
+const {
+  handleName,
+  handleCompany,
+  handleObjective,
+  handleContext,
+  handleDeadline,
+  handleContact,
+  handleConfirmation,
+} = require('../flows/form.flow');
 
-async function getNextState(currentState, message, userId) {
-  const stateDefinition = flow[currentState];
+const userStates = new Map();
 
-  if (!stateDefinition) {
-    return { state: 'GREETING', response: getResponse('invalidOption') };
-  }
+const transitions = {
+  GREETING: handleGreeting,
+  MAIN_MENU: handleMainMenu,
+  LGPD: handleLgpd,
+  FORM_NAME: handleName,
+  FORM_COMPANY: handleCompany,
+  FORM_OBJECTIVE: handleObjective,
+  FORM_CONTEXT: handleContext,
+  FORM_DEADLINE: handleDeadline,
+  FORM_CONTACT: handleContact,
+  FORM_CONFIRMATION: handleConfirmation,
+  // Adicione outros estados e transições aqui
+};
 
-  return await stateDefinition.handle(message, userId);
-}
-
-module.exports = { getNextState };
+module.exports = { userStates, transitions };

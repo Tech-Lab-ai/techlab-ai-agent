@@ -1,18 +1,16 @@
 
-const { client } = require('../config/whatsapp.config');
+const qrcode = require('qrcode-terminal');
+const client = require('../config/whatsapp.config');
 const { handleMessage } = require('./message.router');
 
 client.on('qr', (qr) => {
-  console.log('QR RECEIVED', qr);
-  // Gerar QR Code para autenticação
+  qrcode.generate(qr, { small: true });
 });
 
 client.on('ready', () => {
-  console.log('WhatsApp client is ready!');
+  console.log('Client is ready!');
 });
 
-client.on('message', async (message) => {
-  await handleMessage(message);
-});
+client.on('message', handleMessage);
 
 module.exports = client;

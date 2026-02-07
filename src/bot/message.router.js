@@ -1,23 +1,27 @@
 
-const { getNextState } = require('./state.machine');
-const { getResponse } = require('./responses');
 const { handleAntiDeviation } = require('./antiDeviation');
-
-const userState = new Map(); // Simples armazenamento em memória para o estado do usuário
+const { getResponse } = require('./responses');
+const { userStates, transitions } = require('./state.machine');
 
 async function handleMessage(message) {
-  const currentState = userState.get(message.from) || 'GREETING';
+  const userId = message.from;
+  const currentState = userStates.get(userId) || 'GREETING';
 
-  // Lógica para verificar se a mensagem é uma tentativa de desvio
+  // 1. Verificação de desvio de fluxo
   if (handleAntiDeviation(currentState, message.body)) {
     return message.reply(getResponse('antiDeviation'));
   }
 
-  const nextState = await getNextState(currentState, message.body, message.from);
-  userState.set(message.from, nextState.state);
-
-  if (nextState.response) {
-    message.reply(nextState.response);
+  // 2. Transição de estado
+  const transition = transitions[currentState];
+  if (transition) {
+    const nextStateInfo = await transition(message, userId);
+    userStates.set(userId, nextStateInfo.state);
+    return message.reply(nextStateInfo.response);
+  } else {
+    // Lidar com estados não mapeados ou o fim do fluxo
+    userStates.delete(userId); // Reinicia o estado do usuário
+    return message.reply(getResponse('error'));
   }
 }
 
