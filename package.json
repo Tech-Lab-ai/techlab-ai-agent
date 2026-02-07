@@ -1,15 +1,16 @@
 {
-  "main": "src/index.js",
+  "name": "monorepo",
+  "version": "1.0.0",
+  "workspaces": [
+    "api",
+    "core",
+    "database",
+    "panel",
+    "bot"
+  ],
   "scripts": {
-    "start": "node src/index.js"
-  },
-  "dependencies": {
-    "body-parser": "^2.2.2",
-    "dotenv": "^17.2.4",
-    "express": "^5.2.1",
-    "qrcode-terminal": "^0.12.0",
-    "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7",
-    "whatsapp-web.js": "^1.34.6"
+    "start:api": "npm start --workspace=api",
+    "dev:api": "npm run dev --workspace=api",
+    "migrate:db": "npm run migrate --workspace=database"
   }
 }
