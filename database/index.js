@@ -1,1 +1,0 @@
-console.log('Módulo de Banco de Dados iniciado.');
