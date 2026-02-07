@@ -1,1 +1,100 @@
-node_modules
+# =========================
+# Node.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Build / Dist
+# =========================
+dist/
+build/
+out/
+
+# =========================
+# Coverage / Tests
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# WhatsApp / Sessions
+# =========================
+.auth_info/
+.session/
+sessions/
+whatsapp-sessions/
+wwebjs_auth/
+wwebjs_cache/
+
+# =========================
+# Database
+# =========================
+*.sqlite
+*.sqlite3
+*.db
+data/*.db
+
+# =========================
+# Security / Sensitive
+# =========================
+certs/
+keys/
+secrets/
+tokens/
+*.pem
+*.key
+
+# =========================
+# Uploads / Files
+# =========================
+uploads/
+tmp/
+temp/
+
+# =========================
+# Generated Contracts / Docs
+# =========================
+contracts/generated/
+documents/generated/
+pdfs/
+
+# =========================
+# Runtime / Process
+# =========================
+.pid
+*.pid
+
+# =========================
+# Docker (optional)
+# =========================
+docker-data/
